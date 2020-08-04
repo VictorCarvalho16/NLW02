@@ -1,2 +1,11 @@
 # NLW02
-Next Level Week RockeSeat
+App construido na `Next Level Week` da RockeSeat
+
+## Web Front-End
+### React
+
+## Back-End
+### Node.js - Express
+
+## Mobile
+### ReactNative
