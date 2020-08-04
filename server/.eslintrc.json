@@ -31,7 +31,8 @@
           "ts": "never"
         }
       ],
-      "camelcase": ["error", {"allow": ["week_day", "user_id", "class_id"]}]
+      "camelcase": ["error", {"allow": ["week_day", "user_id", "class_id"]}],
+      "class-methods-use-this": "off"
     },
     "settings": {
       "import/resolver": {
