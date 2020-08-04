@@ -30,7 +30,8 @@
         {
           "ts": "never"
         }
-      ]
+      ],
+      "camelcase": ["error", {"allow": ["week_day", "user_id", "class_id"]}]
     },
     "settings": {
       "import/resolver": {
