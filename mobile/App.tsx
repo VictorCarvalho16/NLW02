@@ -1,3 +1,5 @@
+/* eslint-disable react/style-prop-object */
+/* eslint-disable camelcase */
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { AppLoading } from 'expo';
@@ -20,7 +22,7 @@ export default function App() {
   return (
     <>
       <Landing />
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </>
   );
 }
