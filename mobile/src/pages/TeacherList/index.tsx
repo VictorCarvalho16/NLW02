@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View, ScrollView, TextInput, Text,
 } from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
-import { Feather } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Feather } from '@expo/vector-icons';
 
 import api from '../../services/api';
 
@@ -34,6 +35,12 @@ function TeacherList() {
       }
     });
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFavorites();
+    }, []),
+  );
 
   function handleToggleFilterVisible() {
     setIsFiltersVisible(!isFiltersVisible);
