@@ -31,7 +31,7 @@
           "ts": "never"
         }
       ],
-      "camelcase": ["error", {"allow": ["week_day", "user_id", "class_id"]}],
+      "camelcase": ["error", {"allow": ["week_day", "user_id", "class_id", "first_name", "last_name"]}],
       "class-methods-use-this": "off"
     },
     "settings": {

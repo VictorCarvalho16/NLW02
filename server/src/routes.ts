@@ -1,15 +1,19 @@
 import express from 'express';
 import ClassesControllers from './controllers/ClassesController';
 import ConnectionsController from './controllers/ConnectionsController';
+import UsersController from './controllers/UsersController';
 
 const routes = express.Router();
 const classesControllers = new ClassesControllers();
 const connectionsController = new ConnectionsController();
+const usersController = new UsersController();
 
 routes.get('/classes', classesControllers.index);
 routes.post('/classes', classesControllers.create);
 
 routes.get('/connections', connectionsController.index);
 routes.post('/connections', connectionsController.create);
+
+routes.post('/users', usersController.create);
 
 export default routes;
