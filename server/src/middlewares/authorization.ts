@@ -8,18 +8,25 @@ function createToken(user: string): string {
 }
 
 function verifyToken(
-  req: Request,
-  res: Response,
+  request: Request,
+  response: Response,
   next: NextFunction,
 ): Response<any> | void {
-  const token = req.headers['x-access-token'];
+  const token = request.headers['x-access-token'];
 
   if (!token) {
-    return res.status(401).json({ status: true, message: 'No token provided' });
+    return response
+      .status(401)
+      .json({ status: true, message: 'No token provided' });
   }
 
-  const verify = jwt.verify(String(token), secret);
-  console.log(verify);
+  try {
+    request.body.userId = jwt.verify(String(token), secret);
+  } catch (error) {
+    return response
+      .status(500)
+      .json({ message: 'Failed to authenticate token.' });
+  }
 
   next();
 }

@@ -11,11 +11,11 @@ const classesControllers = new ClassesControllers();
 const connectionsController = new ConnectionsController();
 const usersController = new UsersController();
 
-routes.get('/classes', classesControllers.index);
-routes.post('/classes', classesControllers.create);
+routes.get('/classes', verifyToken, classesControllers.index);
+routes.post('/classes', verifyToken, classesControllers.create);
 
-routes.get('/connections', verifyToken, connectionsController.index);
-routes.post('/connections', connectionsController.create);
+routes.get('/connections', connectionsController.index);
+routes.post('/connections', verifyToken, connectionsController.create);
 
 routes.post('/users', usersController.create);
 routes.post('/users/login', usersController.login);
