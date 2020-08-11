@@ -18,6 +18,8 @@ routes.get('/connections', connectionsController.index);
 routes.post('/connections', verifyToken, connectionsController.create);
 
 routes.post('/users', usersController.create);
+routes.put('/users', verifyToken, usersController.update);
+routes.delete('/users/:id', usersController.delete);
 routes.post('/users/login', usersController.login);
 
 export default routes;

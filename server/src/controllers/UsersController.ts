@@ -6,10 +6,14 @@ import { cryptPassword, verifyPassword } from '../utils/PasswordCrypt';
 import { createToken } from '../middlewares/authorization';
 
 interface IUser {
+  userId?: number;
   first_name?: string;
   last_name?: string;
   email: string;
   password: string;
+  avatar?: string;
+  whatsapp?: string;
+  bio?: string;
 }
 
 export default class UsersController {
@@ -43,6 +47,22 @@ export default class UsersController {
     return response.status(409).json({ error: 'Email Already exists' });
   }
 
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    try {
+      const deleteUser = await db('users').del().where({ id });
+      if (deleteUser === 0) {
+        return response.status(404).json({ error: "User Can't find" });
+      }
+      return response
+        .status(200)
+        .json({ message: `User ${deleteUser} has been deleted` });
+    } catch (error) {
+      return response.status(400).json({ error });
+    }
+  }
+
   async login(request: Request, response: Response): Promise<Response> {
     const { email, password }: IUser = request.body;
 
@@ -69,5 +89,40 @@ export default class UsersController {
     }
 
     return response.status(401).json({ message: 'Wrong password' });
+  }
+
+  async update(request: Request, response: Response): Promise<Response> {
+    const {
+      userId,
+      first_name,
+      last_name,
+      email,
+      avatar,
+      whatsapp,
+      bio,
+    }: IUser = request.body;
+
+    if (!validateEmail(email)) {
+      return response.status(406).json({ error: 'Invalid Email' });
+    }
+
+    try {
+      await db('users')
+        .update({
+          first_name,
+          last_name,
+          email,
+          avatar,
+          whatsapp,
+          bio,
+        })
+        .where({ id: userId });
+
+      return response
+        .status(200)
+        .json({ message: `User ${userId} has been updated` });
+    } catch (error) {
+      return response.status(400).json({ error });
+    }
   }
 }
